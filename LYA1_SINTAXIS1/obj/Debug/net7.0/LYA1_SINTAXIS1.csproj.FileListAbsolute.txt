@@ -1,0 +1,14 @@
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\bin\Debug\net7.0\LYA1_SINTAXIS1.exe
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\bin\Debug\net7.0\LYA1_SINTAXIS1.deps.json
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\bin\Debug\net7.0\LYA1_SINTAXIS1.runtimeconfig.json
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\bin\Debug\net7.0\LYA1_SINTAXIS1.dll
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\bin\Debug\net7.0\LYA1_SINTAXIS1.pdb
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\obj\Debug\net7.0\LYA1_SINTAXIS1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\obj\Debug\net7.0\LYA1_SINTAXIS1.AssemblyInfoInputs.cache
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\obj\Debug\net7.0\LYA1_SINTAXIS1.AssemblyInfo.cs
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\obj\Debug\net7.0\LYA1_SINTAXIS1.csproj.CoreCompileInputs.cache
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\obj\Debug\net7.0\LYA1_SINTAXIS1.dll
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\obj\Debug\net7.0\refint\LYA1_SINTAXIS1.dll
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\obj\Debug\net7.0\LYA1_SINTAXIS1.pdb
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\obj\Debug\net7.0\LYA1_SINTAXIS1.genruntimeconfig.cache
+C:\Users\Giezi Nuñez\Documents\ITQ\4.- CUARTO SEMESTRE\LENGUAJE AUTOMATAS\Unidad 4\LYA1_SINTAXIS1\obj\Debug\net7.0\ref\LYA1_SINTAXIS1.dll
