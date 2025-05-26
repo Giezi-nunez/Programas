@@ -1,0 +1,20 @@
+CREATE OR REPLACE TRIGGER audit_emp_trig
+AFTER UPDATE or INSERT or DELETE on EMPLOYEES
+FOR EACH ROW
+BEGIN
+IF DELETING THEN var_pack.set_g_del(1);
+ELSIF INSERTING THEN var_pack.set_g_ins(1);
+ELSIF UPDATING ('SALARY')
+
+THEN var_pack.set_g_up_sal(1);
+
+ELSE var_pack.set_g_upd(1);
+END IF;
+END audit_emp_trig;
+CREATE OR REPLACE TRIGGER audit_emp_tab
+AFTER UPDATE or INSERT or DELETE on employees
+BEGIN
+audit_emp;
+END audit_emp_tab;
+End
+/

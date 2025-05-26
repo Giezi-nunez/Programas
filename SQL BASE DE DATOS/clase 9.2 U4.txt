@@ -1,0 +1,11 @@
+CREATE TABLE audit_emp_table
+(
+user_name varchar2(20),
+timestamp date,
+id number(6),
+old_last_name varchar2(25),
+new_last_name varchar2(25),
+old_title varchar2(10),
+new_title varchar2(10),
+old_salary number(8,2),
+new_salary number(8,2));

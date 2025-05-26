@@ -1,0 +1,22 @@
+CREATE OR REPLACE PROCEDURE audit_emp IS
+v_del NUMBER := var_pack.g_del;
+v_ins NUMBER := var_pack.g_ins;
+v_upd NUMBER := var_pack.g_upd;
+v_up_sal NUMBER := var_pack.g_up_sal;
+BEGIN
+IF v_del + v_ins + v_upd != 0 THEN
+UPDATE audit_table SET
+del = del + v_del, ins = ins + v_ins,
+upd = upd + v_upd
+WHERE user_name=USER AND tablename='EMPLOYEES'
+AND column_name IS NULL;
+END IF;
+IF v_up_sal != 0 THEN
+UPDATE audit_table SET upd = upd + v_up_sal
+WHERE user_name=USER AND tablename='EMPLOYEES'
+AND column_name = 'SALARY';
+END IF;
+-- resetting global variables in package VAR_PACK
+var_pack.set_g_del (0); var_pack.set_g_ins (0);
+var_pack.set_g_upd (0); var_pack.set_g_up_sal (0);
+END audit_emp;

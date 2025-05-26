@@ -1,0 +1,8 @@
+Disable or reenable a database trigger:
+ALTER TRIGGER trigger_name DISABLE | ENABLE
+
+Disable or reenable all triggers for a table:
+ALTER TABLE table_name DISABLE | ENABLE ALL TRIGGERS
+
+Recompile a trigger for a table:
+ALTER TRIGGER trigger_name COMPILE

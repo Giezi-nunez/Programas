@@ -1,0 +1,20 @@
+
+DECLARE
+    v_isbn_libro VARCHAR2(13);
+    v_autor VARCHAR2(200);
+BEGIN
+    v_isbn_libro := '&ISBN';
+
+    SELECT a.Nombre || ' ' || a.Apellido INTO v_autor
+    FROM libro l
+    JOIN autores a ON l.Id_autor = a.Id_autor
+    WHERE l.ISBN = v_isbn_libro;
+
+    DBMS_OUTPUT.PUT_LINE('El autor del libro con ISBN ' || v_isbn_libro || ' es: ' || v_autor);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No se encontró un libro con el ISBN proporcionado.');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+END;
+/

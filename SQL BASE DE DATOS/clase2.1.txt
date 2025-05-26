@@ -1,0 +1,10 @@
+SET SERVEROUTPUT ON;
+
+BEGIN
+    FOR emp_record IN (SELECT last_name, department_id FROM employees) LOOP
+        IF emp_record.department_id = 80 THEN
+            DBMS_OUTPUT.PUT_LINE('Employee ' || emp_record.last_name || ' works in the Sales Dept.');
+        END IF;
+    END LOOP;
+END;
+/

@@ -1,0 +1,61 @@
+SET SERVEROUTPUT ON;
+DECLARE
+v_deptno NUMBER(4);
+v_location_id NUMBER(4);
+BEGIN
+SELECT department_id, location_id
+INTO v_deptno, v_location_id
+FROM departments
+WHERE department_name = 'Sales';
+DBMS_OUTPUT.PUT_LINE ('Valor de V_DEPTNO: ' || TO_CHAR(V_DEPTNO));
+DBMS_OUTPUT.PUT_LINE ('Valor de V_LOCATION_ID: ' || TO_CHAR(V_LOCATION_ID));
+END;
+/
+
+DECLARE
+v_hire_date employees.hire_date%TYPE;
+v_salary employees.salary%TYPE;
+BEGIN
+SELECT hire_date, salary
+INTO v_hire_date, v_salary
+FROM employees
+WHERE employee_id = 100; 
+DBMS_OUTPUT.PUT_LINE ('Valor de v_hire_date: ' || TO_CHAR(v_hire_date));
+DBMS_OUTPUT.PUT_LINE ('Valor de v_salary: ' || TO_CHAR(v_salary));
+END;
+/
+
+
+
+SET SERVEROUTPUT ON
+DECLARE
+v_sum_sal NUMBER (10,2);
+v_deptno NUMBER NOT NULL :=60;
+BEGIN
+SELECT SUM(salary) 
+INTO v_sum_sal
+FROM employees
+WHERE department_id =v_deptno;
+DBMS_OUTPUT.PUT_LINE ('The sum salary is '|| TO_CHAR (v_sum_sal));
+END;
+/
+
+
+BEGIN 
+INSERT INTO employees
+(employee_id, first_name, last_name, email,
+hire_date, job_id, salary)
+
+VALUES
+(employees_seq.NEXTVAL, 'Ruth', 'Cores', 'RCORES', sysdate, 'AD_ASST', 4000);
+END;
+/
+
+DECLARE
+v_sal_increase employees.salary%TYPE :=800;
+BEGIN
+UPDATE employees
+SET salary=salary+v_sal_increase
+WHERE job_id='ST_CLERK';
+END;
+/ 

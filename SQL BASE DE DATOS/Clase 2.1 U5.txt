@@ -1,0 +1,19 @@
+CREATE OR REPLACE TRIGGER employees2
+BEFORE INSERT OR UPDATE OF salary, job_id
+ON employees2
+FOR EACH ROW
+WHEN (NEW.job_id <> 'AD_PRES')
+DECLARE
+v_minsalary employees2.salary%TYPE;
+v_maxsalary employees2.salary%TYPE;
+BEGIN
+SELECT MIN(salary), MAX(salary)
+INTO v_minsalary, v_maxsalary
+FROM employees2
+WHERE job_id = :NEW.job_id;
+IF :NEW.salary < v_minsalary OR
+:NEW.salary > v_maxsalary THEN
+RAISE_APPLICATION_ERROR(-20505,'Out of range');
+END IF;
+END;
+/

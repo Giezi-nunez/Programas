@@ -1,0 +1,35 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+    v_employee_id employees.employee_id%TYPE;
+    v_job_id      employees.job_id%TYPE;
+    v_start_date  DATE;
+    v_end_date    DATE;
+
+    CURSOR emp_cursor IS
+        SELECT employee_id, job_id, start_date, end_date
+        FROM job_history
+        ORDER BY employee_id;
+
+BEGIN
+    OPEN emp_cursor;
+
+    LOOP
+        FETCH emp_cursor INTO v_employee_id, v_job_id, v_start_date, v_end_date;
+
+        -- Exit the loop if no more rows are found
+        EXIT WHEN emp_cursor%NOTFOUND;
+
+        -- Display the employee information
+        DBMS_OUTPUT.PUT_LINE('Employee #: ' || v_employee_id ||
+                             ' held the job of ' || v_job_id ||
+                             ' from ' || TO_CHAR(v_start_date, 'DD-MON-YYYY') ||
+                             ' to ' || TO_CHAR(v_end_date, 'DD-MON-YYYY'));
+
+        -- Exit the loop after processing 4 rows
+        EXIT WHEN emp_cursor%ROWCOUNT > 4;
+    END LOOP;
+
+    CLOSE emp_cursor;
+END;
+/

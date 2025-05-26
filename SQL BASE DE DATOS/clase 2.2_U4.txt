@@ -1,0 +1,8 @@
+VARIABLE g_phone_no VARCHAR2(15)
+BEGIN
+:g_phone_no := '8006330575';
+END;
+/
+PRINT g_phone_no
+EXECUTE format_phone (:g_phone_no)
+PRINT g_phone_no

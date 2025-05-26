@@ -1,0 +1,14 @@
+DECLARE
+CURSOR my_cursor IS
+SELECT t1.department_id, t1.department_name,
+
+t2.staff
+
+FROM departments t1, (SELECT department_id,
+COUNT(*) AS STAFF
+
+FROM employees2
+GROUP BY department_id) t2
+
+WHERE t1.department_id = t2.department_id
+AND t2.staff >= 3;

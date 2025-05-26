@@ -1,0 +1,98 @@
+-- Crear la tabla autores
+CREATE TABLE autores (
+    Id_autor NUMBER PRIMARY KEY,
+    Nombre VARCHAR2(100) NOT NULL,
+    Apellido VARCHAR2(100) NOT NULL,
+    Fecha_nacimiento DATE NOT NULL
+);
+
+-- Insertar datos en la tabla autores
+INSERT INTO autores (Id_autor, Nombre, Apellido, Fecha_nacimiento) VALUES
+(1, 'Gabriel', 'Garcia Marquez', TO_DATE('1927-03-06', 'YYYY-MM-DD'));
+INSERT INTO autores (Id_autor, Nombre, Apellido, Fecha_nacimiento) VALUES
+(2, 'Jorgue Luis', 'Borgues', TO_DATE('1899-08-24', 'YYYY-MM-DD'));
+INSERT INTO autores (Id_autor, Nombre, Apellido, Fecha_nacimiento) VALUES
+(3, 'Julio', 'Cortazar', TO_DATE('1914-08-26', 'YYYY-MM-DD'));
+INSERT INTO autores (Id_autor, Nombre, Apellido, Fecha_nacimiento) VALUES
+(4, 'Isabel', 'Allende', TO_DATE('1942-08-02', 'YYYY-MM-DD'));
+INSERT INTO autores (Id_autor, Nombre, Apellido, Fecha_nacimiento) VALUES
+(5, 'Mario', 'Vargas Llosa', TO_DATE('1936-03-28', 'YYYY-MM-DD'));
+
+-- Crear la tabla libro
+CREATE TABLE libro (
+    ISBN VARCHAR2(13) PRIMARY KEY,
+    Titulo VARCHAR2(100) NOT NULL,
+    Año_publicacion NUMBER NOT NULL,
+    Genero VARCHAR2(100) NOT NULL,
+    cantidad_disponible NUMBER NOT NULL,
+    Id_autor NUMBER NOT NULL,
+    CONSTRAINT fk_autor FOREIGN KEY (Id_autor) REFERENCES autores(Id_autor)
+);
+
+-- Insertar datos en la tabla libro
+INSERT INTO libro (ISBN, Titulo, Año_publicacion, Genero, cantidad_disponible, Id_autor) VALUES
+('9780307474728', 'Cien años de soledad', 1967, 'Novela', 10, 1);
+INSERT INTO libro (ISBN, Titulo, Año_publicacion, Genero, cantidad_disponible, Id_autor) VALUES
+('9788401354976', 'La casa de los espíritus', 1982, 'Novela', 8, 4);
+INSERT INTO libro (ISBN, Titulo, Año_publicacion, Genero, cantidad_disponible, Id_autor) VALUES
+('9788420471839', 'La ciudad y los perros', 1962, 'Novela', 6, 5);
+INSERT INTO libro (ISBN, Titulo, Año_publicacion, Genero, cantidad_disponible, Id_autor) VALUES
+('9788437604947', 'Ficciones', 1944, 'Cuentos', 5, 2);
+INSERT INTO libro (ISBN, Titulo, Año_publicacion, Genero, cantidad_disponible, Id_autor) VALUES
+('9788437604948', 'Rayuela', 1963, 'Novela', 7, 3);
+
+-- Crear la tabla miembros
+CREATE TABLE miembros (
+    ID_Miembro NUMBER PRIMARY KEY,
+    Nombre VARCHAR2(100) NOT NULL,
+    Direccion VARCHAR2(255) NOT NULL,
+    Telefono VARCHAR2(15) NOT NULL,
+    Fecha_registro DATE NOT NULL
+);
+
+-- Insertar datos en la tabla miembros
+INSERT INTO miembros (ID_Miembro, Nombre, Direccion, Telefono, Fecha_registro) VALUES
+(1, 'Juan', 'Calle Falsa 123', '555-1234', TO_DATE('2023-01-01', 'YYYY-MM-DD'));
+INSERT INTO miembros (ID_Miembro, Nombre, Direccion, Telefono, Fecha_registro) VALUES
+(2, 'Ana', 'Avenida Siempre Viva 456', '555-5678', TO_DATE('2023-02-15', 'YYYY-MM-DD'));
+INSERT INTO miembros (ID_Miembro, Nombre, Direccion, Telefono, Fecha_registro) VALUES
+(3, 'Luis', 'Boulevard Los Sueños 789', '555-8765', TO_DATE('2023-03-10', 'YYYY-MM-DD'));
+INSERT INTO miembros (ID_Miembro, Nombre, Direccion, Telefono, Fecha_registro) VALUES
+(4, 'Maria', 'Calle Luna 101', '555-4321', TO_DATE('2023-04-20', 'YYYY-MM-DD'));
+INSERT INTO miembros (ID_Miembro, Nombre, Direccion, Telefono, Fecha_registro) VALUES
+(5, 'Carlos', 'Avenida Sol 202', '555-6543', TO_DATE('2023-05-05', 'YYYY-MM-DD'));
+
+-- Crear la tabla prestamo
+CREATE TABLE prestamo (
+    ID_Prestamo NUMBER PRIMARY KEY,
+    ISBN_Libro VARCHAR2(13) NOT NULL,
+    ID_Miembro NUMBER NOT NULL,
+    Fecha_prestamo DATE NOT NULL,
+    Fecha_devolucion DATE NOT NULL,
+    CONSTRAINT fk_libro FOREIGN KEY (ISBN_Libro) REFERENCES libro(ISBN),
+    CONSTRAINT fk_miembro FOREIGN KEY (ID_Miembro) REFERENCES miembros(ID_Miembro)
+);
+
+-- Crear un bloque PL/SQL para realizar un préstamo
+DECLARE
+    v_id_prestamo NUMBER := 1; -- Asigna un ID de préstamo único
+    v_isbn_libro VARCHAR2(13) := '9780307474728'; -- ISBN del libro a prestar
+    v_id_miembro NUMBER := 1; -- ID del miembro que realiza el préstamo
+BEGIN
+    -- Insertar el préstamo en la tabla prestamo
+    INSERT INTO prestamo (ID_Prestamo, ISBN_Libro, ID_Miembro, Fecha_prestamo, Fecha_devolucion)
+    VALUES (v_id_prestamo, v_isbn_libro, v_id_miembro, SYSDATE, SYSDATE + 7);
+
+    -- Actualizar la cantidad disponible del libro
+    UPDATE libro
+    SET cantidad_disponible = cantidad_disponible - 1
+    WHERE ISBN = v_isbn_libro;
+
+    COMMIT;
+    DBMS_OUTPUT.PUT_LINE('Préstamo realizado con éxito.');
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Error al realizar el préstamo: ' || SQLERRM);
+END;
+/

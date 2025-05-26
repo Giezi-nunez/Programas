@@ -1,0 +1,26 @@
+CREATE OR REPLACE TRIGGER notify_reorder_rep
+BEFORE UPDATE OF amount_in_stock, reorder_point
+ON inventory FOR EACH ROW
+DECLARE
+v_descrip product.descrip%TYPE;
+v_msg_text VARCHAR2(2000);
+stat_send number(1);
+BEGIN
+IF :NEW.amount_in_stock <= :NEW.reorder_point THEN
+SELECT descrip INTO v_descrip
+FROM PRODUCT WHERE prodid = :NEW.product_id;
+v_msg_text := 'ALERT: INVENTORY LOW ORDER:'||CHR(10)||
+'It has come to my personal attention that, due to recent'
+||CHR(10)||'transactions, our inventory for product # '||
+TO_CHAR(:NEW.product_id)||'-- '||v_descrip ||
+' -- has fallen below acceptable levels.' || CHR(10) ||
+'Yours,' ||CHR(10) ||user || '.'|| CHR(10)|| CHR(10);
+ELSIF
+:OLD.amount_in_stock<:NEW.amount_in_stock THEN NULL;
+ELSE
+v_msg_text := 'Product #'|| TO_CHAR(:NEW.product_id)
+||' ordered. '|| CHR(10)|| CHR(10); END IF;
+DBMS_PIPE.PACK_MESSAGE(v_msg_text);
+stat_send := DBMS_PIPE.SEND_MESSAGE('INV_PIPE');
+END;
+/
